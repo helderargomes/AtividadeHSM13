@@ -1,0 +1,50 @@
+CREATE TABLE StatusPedido (
+ID int(11) NOT NULL,
+Nome varchar(100),
+PRIMARY KEY(ID)
+);
+
+CREATE TABLE Cliente (
+ID int(11) NOT NULL,
+Nome varchar(100) NOT NULL,
+Telefone varchar(100) NOT NULL,
+LimiteCredito float(11) DEFAULT NULL,
+ID_STATUS int(11) NOT NULL,
+PRIMARY KEY(ID),
+FOREIGN KEY(ID_STATUS) REFERENCES StatusPedido(ID)
+);
+
+CREATE TABLE Pedido (
+ID int(11) NOT NULL,
+Nome varchar(100) NOT NULL,
+Preco float(11) NOT NULL,
+DataRealizacao date NOT NULL,
+PRIMARY KEY(ID)
+);
+
+CREATE TABLE Categoria (
+ID int(11) NOT NULL,
+Nome varchar(100) NOT NULL,
+PRIMARY KEY(ID)
+);
+
+CREATE TABLE Produto (
+ID int(11) NOT NULL,
+Nome varchar(100) NOT NULL,
+ID_CATEGORIA int(11) NOT NULL,
+PRIMARY KEY(ID),
+FOREIGN KEY(ID_CATEGORIA) REFERENCES Categoria(ID)
+);
+
+CREATE TABLE Pedido_Contem_Produto (
+ID_PEDIDO int(11) NOT NULL,
+ID_PRODUTO int(11) NOT NULL,
+Quantidade int(11) NOT NULL,
+PRIMARY KEY(ID_PEDIDO, ID_PRODUTO),
+FOREIGN KEY(ID_PEDIDO) REFERENCES Pedido(ID),
+FOREIGN KEY(ID_PRODUTO) REFERENCES Produto(ID)
+);
+
+
+
+
